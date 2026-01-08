@@ -1,3 +1,5 @@
+from datetime import datetime
+
 def analyze_numbers(numbers):
     #This function takes a list of numbers and returns their sum, average, maximum, and minimum
     if not numbers:
@@ -41,17 +43,30 @@ def collect_and_analyze():
         print(f"Average: {average}")
         print(f"Maximum: {maximum}")
         print(f"Minimum: {minimum}")
+        # Save the analysis report to report.txt with a timestamp
+        # Overwrite the file each time this analysis runs
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        report_lines = [
+            f"Analysis Report - {timestamp}",
+            f"Numbers: {numbers}",
+            f"Count: {count}",
+            f"Sum: {total}",
+            f"Average: {average}",
+            f"Maximum: {maximum}",
+            f"Minimum: {minimum}",
+        ]
+        with open("report.txt", "w", encoding="utf-8") as f:
+            f.write("\n".join(report_lines) + "\n")
+        print("Analysis saved to report.txt")
     else:
         print("No numbers were entered.")
 
-def main():
-    
+def menu_options():
     #show menu options
     #1) Enter numbers and analyze
     #2) Exit the program
     #3) Ask user to choose an option
     while True:
-        #show menu options
         print("\n--- Menu ---")
         print("1) Enter numbers and analyze")
         print("2) Exit the program")
@@ -65,7 +80,10 @@ def main():
             break
         else:
             print("Invalid option. Please choose 1 or 2.")
+         
 
+def main():
+    menu_options()
 
 if __name__ == "__main__":
      main()
