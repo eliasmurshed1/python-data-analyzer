@@ -1,10 +1,17 @@
-def main():
-    #Ask the user how many numbers they would like to enter
-    #loop to get that many numbers from the user
-    #validate that the user enters only numbers
-    #store the numbers in a list
-    #print the list of numbers
+def analyze_numbers(numbers):
+    #This function takes a list of numbers and returns their sum, average, maximum, and minimum
+    if not numbers:
+        return None
+    total = sum(numbers)
+    count = len(numbers)
+    average = total / len(numbers)
+    maximum = max(numbers)
+    minimum = min(numbers)
+    return total, average, maximum, minimum
 
+
+def main():
+    #this function collects a series of numbers from the user and stores them in a list
     while True:
         try:
             count = int(input("How many numbers would you like to enter?: "))
@@ -25,6 +32,18 @@ def main():
             except ValueError:
                 print("Please enter a valid integer.")
     print(numbers)
+
+
+    results = analyze_numbers(numbers)
+    if results:
+        total, average, maximum, minimum = results
+        print(f"Sum: {total}")
+        print(f"Count: {count}")
+        print(f"Average: {average}")
+        print(f"Maximum: {maximum}")
+        print(f"Minimum: {minimum}")
+    else:
+        print("No numbers were entered.")
 
 if __name__ == "__main__":
      main()
