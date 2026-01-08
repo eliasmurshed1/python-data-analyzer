@@ -9,9 +9,8 @@ def analyze_numbers(numbers):
     minimum = min(numbers)
     return total, average, maximum, minimum
 
-
-def main():
-    #this function collects a series of numbers from the user and stores them in a list
+def collect_and_analyze():
+    #This function collects a series of numbers from the user and stores them in a list
     while True:
         try:
             count = int(input("How many numbers would you like to enter?: "))
@@ -44,6 +43,29 @@ def main():
         print(f"Minimum: {minimum}")
     else:
         print("No numbers were entered.")
+
+def main():
+    
+    #show menu options
+    #1) Enter numbers and analyze
+    #2) Exit the program
+    #3) Ask user to choose an option
+    while True:
+        #show menu options
+        print("\n--- Menu ---")
+        print("1) Enter numbers and analyze")
+        print("2) Exit the program")
+        
+        choice = input("Choose an option (1 or 2): ")
+        
+        if choice == "1":
+            collect_and_analyze()
+        elif choice == "2":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid option. Please choose 1 or 2.")
+
 
 if __name__ == "__main__":
      main()
