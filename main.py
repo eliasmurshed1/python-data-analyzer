@@ -1,4 +1,5 @@
 from datetime import datetime
+from storage import save_numbers, load_numbers
 
 def analyze_numbers(numbers):
     #This function takes a list of numbers and returns their sum, average, maximum, and minimum
@@ -33,6 +34,7 @@ def collect_and_analyze():
             except ValueError:
                 print("Please enter a valid integer.")
     print(numbers)
+    
 
 
     results = analyze_numbers(numbers)
@@ -60,26 +62,44 @@ def collect_and_analyze():
         print("Analysis saved to report.txt")
     else:
         print("No numbers were entered.")
+    return numbers
 
 def menu_options():
     #show menu options
     #1) Enter numbers and analyze
     #2) Exit the program
     #3) Ask user to choose an option
+    numbers = []
     while True:
         print("\n--- Menu ---")
         print("1) Enter numbers and analyze")
-        print("2) Exit the program")
+        print("2) Save numbers to JSON file")
+        print("3) Load numbers from JSON file")
+        print("4) Exit the program")
         
-        choice = input("Choose an option (1 or 2): ")
+        choice = input("Choose an option (1, 2, 3, or 4): ")
         
         if choice == "1":
-            collect_and_analyze()
+            numbers = collect_and_analyze()
         elif choice == "2":
-            print("Goodbye!")
+            try:
+                save_numbers(numbers)
+            except Exception as e:
+                print(f"Error saving numbers: {e}")
+            print("Numbers saved to data.json")
+        elif choice == "3":
+            try:
+                loaded_numbers = load_numbers()
+                print(f"Loaded numbers: {loaded_numbers}")
+            except Exception as e:
+                print(f"Error loading numbers: {e}")
+            else:
+                print("Numbers saved to data.json")
+        elif choice == "4":
+            print("Exiting the program.Goodbye")
             break
         else:
-            print("Invalid option. Please choose 1 or 2.")
+            print("Invalid option. Please choose 1, 2, 3, or 4.")
          
 
 def main():
