@@ -20,3 +20,18 @@ def load_numbers(filename="data.json"):
             return data.get("numbers", [])
     except (FileNotFoundError, json.JSONDecodeError):
         return []
+    
+    def save_report(numbers, results, filename="report.txt"):
+        total, average, maximum, minimum = results
+        report_lines = [
+            f"Analysis Report",
+            f"Numbers: {numbers}",
+            f"Count: {len(numbers)}",
+            f"Sum: {total}",
+            f"Average: {average}",
+            f"Maximum: {maximum}",
+            f"Minimum: {minimum}",
+        ]
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write("\n".join(report_lines) + "\n") 
+        print("Analysis saved to report.txt")
